@@ -293,17 +293,50 @@ In onCreate, register the receivers, and start the Service, which should send th
 
 # Widgets
 
-## Navigation Bar
+UI Widgets that allow for common UX solutions and themes. 
 
-The Navigation Bar is used in order to switch tabs between Layouts in app. It can be used in conjunction with other Widgets i.e. have one Widget per tab (Layout). 
-
-> Navigation Bar Code Example
+> Widgets Code Example
 
 ```java
+package com.thermofisher.eguiexample;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.example.egui.Widgets.BaseDialogFragment;
+import com.example.egui.Widgets.ConfirmDialogFragment;
+import com.example.egui.Widgets.EditTextDialogFragment;
+import com.example.egui.Widgets.EnterPinDialogFragment;
+import com.example.egui.Widgets.NavigationBar;
+import com.example.egui.Widgets.NumberPad;
+import com.example.egui.Widgets.ProgressFragment;
+import com.example.egui.Widgets.TableView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.text.InputType.TYPE_CLASS_TEXT;
+import static android.text.InputType.TYPE_TEXT_VARIATION_PERSON_NAME;
+
+/**
+ * Created by brandon.huang on 7/31/17.
+ */
 
 public class NavigationBarActivity extends Activity {
 
     private NavigationBar navigationBar;
+    private LinearLayout page1, page2, page3, page4, page5;
+    private NumberPad numberPad;
+    private TableView tableView;
+    private int count;
+    private TextView textView, numberPadText, confirmText;
+    private ProgressFragment progressDialog;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -314,59 +347,51 @@ public class NavigationBarActivity extends Activity {
         navigationBar = (NavigationBar) findViewById(R.id.navigationBar);
         navigationBar.addItem("Table");
         navigationBar.addItem("Keyboard");
-        
+        navigationBar.addItem("Number Pad");
+        navigationBar.addItem("Confirm");
+        navigationBar.addItem("Progress");
         navigationBar.setOnItemClickListener(navigationBarItemClickListener);
 
         //Initialize LinearLayouts
         page1 = (LinearLayout) findViewById(R.id.Layout1);
         page2 = (LinearLayout) findViewById(R.id.Layout2);
-        
+        page3 = (LinearLayout) findViewById(R.id.Layout3);
+        page4 = (LinearLayout) findViewById(R.id.Layout4);
+        page5 = (LinearLayout) findViewById(R.id.Layout5);
+
+
         //Set only page 1 to appear initially
         page2.setVisibility(View.GONE);
+        page3.setVisibility(View.GONE);
+        page4.setVisibility(View.GONE);
+        page5.setVisibility(View.GONE);
 
         //initialize layout parts
         tableView = (TableView) findViewById(R.id.tableView);
         textView = (TextView) findViewById(R.id.textView);
+        numberPadText = (TextView) findViewById(R.id.numberPadText);
+        confirmText = (TextView) findViewById(R.id.confirmText);
 
-        private NavigationBar.OnItemClickListener navigationBarItemClickListener = new NavigationBar.OnItemClickListener() {
 
-        @Override
-        public void onItemClicked(View View, int itemIndex) {
-            if (itemIndex == 0) {
-                page1.setVisibility(android.view.View.VISIBLE);
-                page2.setVisibility(View.GONE);
-            } else if (itemIndex == 1){
-                page1.setVisibility(View.GONE);
-                page2.setVisibility(android.view.View.VISIBLE);
+        List<String> tableHeader = new ArrayList<>();
+        tableHeader.add("Column 1");
+        tableHeader.add("Column 2");
+        tableHeader.add("Column 3");
+
+        List<List<String>> profilesData = new ArrayList<>();
+
+        for (int i = 0; i < 5; i++) {
+            List<String> profileData = new ArrayList<>();
+
+            for (int j = 0; j < 3; j++) {
+                profileData.add(Integer.toString(count++));
             }
-        };
-  }
+            profilesData.add(profileData);
+        }
 
-```
-
-## Custom Keyboard
-
-> Custom Keyboard Code Example
-
-```java
-
-public class KeyboardActivity extends Activity {
-
-    TextView textView;
-    Button typeButton;
-    private int[] enabledSpecialChars;
-    private static final DCLog LOG = DCLog.getLogger(KeyboardActivity.class);
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.keyboard);
-
-        textView = (TextView) findViewById(R.id.textView);
-
-        final CustomKeyboard keyboard = new CustomKeyboard(this,
-                (CustomKeyboardView)findViewById(R.id.keyboardview));
+        tableView.setColumnWidths(new int[] {150, 300, 300});
+        tableView.setColumnHeaders(tableHeader);
+        tableView.setData(profilesData);
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -381,162 +406,128 @@ public class KeyboardActivity extends Activity {
 
             }
         });
-    }
-}
 
+        numberPadText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final EnterPinDialogFragment pinFragment = new EnterPinDialogFragment();
+                //NumberPadDialogFragment fragment = new NumberPadDialogFragment();
+                pinFragment.setTitle("Enter Pin");
+                pinFragment.show(getFragmentManager(), "editTextDialog");
+                final ConfirmDialogFragment confirmPin = new ConfirmDialogFragment();
+                confirmPin.showSecondaryButton(false);
+
+                pinFragment.setDismissListener(new BaseDialogFragment.DismissListener() {
+                    @Override
+                    public void onDismiss(Bundle bundle) {
+                        if (pinFragment.getPinEntered().equals("3333")) {
+                            confirmPin.setPrimaryButtonText("OK");
+                            confirmPin.show(getFragmentManager(), "Pin Confirmation");
+                            confirmPin.setPrimaryMessage("Correct Pin");
+                        } else {
+                            confirmPin.setPrimaryButtonText("OK");
+                            confirmPin.show(getFragmentManager(), "Pin Confirmation");
+                            confirmPin.setPrimaryMessage("Incorrect Pin \nEntered: " + pinFragment.getPinEntered());
+                        }
+                    }
+                });
+            }
+        });
+
+        confirmText.setText("Confirm");
+        confirmText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ConfirmDialogFragment fragment = new ConfirmDialogFragment();
+                fragment.setPrimaryButtonText("Primary Button");
+                fragment.setSecondaryButtonText("Secondary Button");
+                fragment.show(getFragmentManager(), "Confirm");
+                fragment.setPrimaryMessage("Confirmation");
+            }
+        });
+
+    }
+
+    private NavigationBar.OnItemClickListener navigationBarItemClickListener = new NavigationBar.OnItemClickListener() {
+
+        @Override
+        public void onItemClicked(View View, int itemIndex) {
+            if (itemIndex == 0) {
+                page1.setVisibility(android.view.View.VISIBLE);
+                page2.setVisibility(View.GONE);
+                page3.setVisibility(View.GONE);
+                page4.setVisibility(View.GONE);
+                page5.setVisibility(View.GONE);
+            } else if (itemIndex == 1){
+                page1.setVisibility(View.GONE);
+                page2.setVisibility(android.view.View.VISIBLE);
+                page3.setVisibility(View.GONE);
+                page4.setVisibility(View.GONE);
+                page5.setVisibility(View.GONE);
+
+            } else if (itemIndex == 2) {
+                page1.setVisibility(View.GONE);
+                page2.setVisibility(View.GONE);
+                page3.setVisibility(android.view.View.VISIBLE);
+                page4.setVisibility(View.GONE);
+                page5.setVisibility(View.GONE);
+
+            } else if (itemIndex == 3){
+                page1.setVisibility(View.GONE);
+                page2.setVisibility(View.GONE);
+                page3.setVisibility(View.GONE);
+                page4.setVisibility(android.view.View.VISIBLE);
+                page5.setVisibility(View.GONE);
+
+            } else {
+                page1.setVisibility(View.GONE);
+                page2.setVisibility(View.GONE);
+                page3.setVisibility(View.GONE);
+                page4.setVisibility(View.GONE);
+                page5.setVisibility(android.view.View.VISIBLE);
+
+                progressDialog = new ProgressFragment();
+                progressDialog.setTitle("egui Test Progress");
+                progressDialog.setProgressMessage("Loading");
+                progressDialog.show(getFragmentManager(), null);
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressDialog.dismiss();
+                    }
+                }, 5000);
+            }
+        }
+    };
+}
 ```
+### Navigation Bar
+
+The Navigation Bar is used in order to switch tabs between Layouts in app. It can be used in conjunction with other Widgets i.e. have one Widget per tab (Layout). 
+
+### Custom Keyboard
 
 The Custom Keyboard widget is meant to be used as a uniform keyboard for all Thermo Fisher products. It is a pop-up keyboard that appears once the user initiates a certain action i.e. clicking a button or text.
 
-### Instructions to Setup
+#### Instructions to Setup
 
 In appropriate layout xml file, state CustomKeyboardView. Example code shows how to properly call EditText Fragment in order to edit using the keyboard.
 
-## Table
+###Table
 
 A table widget with specified columns and rows. The code example creates a 3 columned table, and populates it with numbers.
 
-> Custom Table Code Example
-
-```java
-
-public class TableActivity extends Activity {
-      private TableView tableView;
-
-      @Override
-      protected void onCreate(Bundle savedInstanceState) {
-
-          tableView = (TableView) findViewById(R.id.tableView);
-          List<String> tableHeader = new ArrayList<>();
-          tableHeader.add("Column 1");
-          tableHeader.add("Column 2");
-          tableHeader.add("Column 3");
-
-          List<List<String>> profilesData = new ArrayList<>();
-
-          for (int i = 0; i < 5; i++) {
-              List<String> profileData = new ArrayList<>();
-
-              for (int j = 0; j < 3; j++) {
-                  profileData.add(Integer.toString(count++));
-              }
-              profilesData.add(profileData);
-          }
-
-          tableView.setColumnWidths(new int[] {150, 300, 300});
-          tableView.setColumnHeaders(tableHeader);
-          tableView.setData(profilesData);
-
-      }
-
-```
-
-## Enter Pin
+### Enter Pin
 
 A pin pad created using the numberpad widget. Can register it to check for a correct pin number. The code example uses a textview as a button, which leads to a enter pin Fragment Dialog.
 
-> Custom Pin Pad Code Example
-
-```java
-
-public class PinActivity extends Activity {
-    numberPadText = (TextView) findViewById(R.id.numberPadText);
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.nav_bar);
-
-        numberPadText.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    final EnterPinDialogFragment pinFragment = new EnterPinDialogFragment();
-                    //NumberPadDialogFragment fragment = new NumberPadDialogFragment();
-                    pinFragment.setTitle("Enter Pin");
-                    pinFragment.show(getFragmentManager(), "editTextDialog");
-                    final ConfirmDialogFragment confirmPin = new ConfirmDialogFragment();
-                    confirmPin.showSecondaryButton(false);
-
-                    pinFragment.setDismissListener(new BaseDialogFragment.DismissListener() {
-                        @Override
-                        public void onDismiss(Bundle bundle) {
-                            if (pinFragment.getPinEntered().equals("3333")) {
-                                confirmPin.setPrimaryButtonText("OK");
-                                confirmPin.show(getFragmentManager(), "Pin Confirmation");
-                                confirmPin.setPrimaryMessage("Correct Pin");
-                            } else {
-                                confirmPin.setPrimaryButtonText("OK");
-                                confirmPin.show(getFragmentManager(), "Pin Confirmation");
-                                confirmPin.setPrimaryMessage("Incorrect Pin \nEntered: " + pinFragment.getPinEntered());
-                            }
-                        }
-                    });
-                }
-            });
-      }
-}
-
-```
-
-## Confirm Dialog
+### Confirm Dialog
 
 A confirmation page that has a primary and secondary button. The code example creates a confirmation page with the message set to "Confirmation", and a Primary and Seconday Button.
 
-> Custon Confirmation Page Code Example
-
-```java
-
-public class ConfirmActivity extends Activity {
-
-    private confirmText;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.nav_bar);
-
-        confirmText.setText("Confirm");
-            confirmText.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ConfirmDialogFragment fragment = new ConfirmDialogFragment();
-                    fragment.setPrimaryButtonText("Primary Button");
-                    fragment.setSecondaryButtonText("Secondary Button");
-                    fragment.show(getFragmentManager(), "Confirm");
-                    fragment.setPrimaryMessage("Confirmation");
-                }
-            });
-    }
-}
-
-```
-
-## Progress Dialog
+### Progress Dialog
 
 A progress page that has a splash animation. The code example displays a Progress page that stays on for 5 seconds before being dismissed.
 
-> Custom Progress Page Code Example
-
-```java
-
-public class ProgressActivity extends Activity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.nav_bar);
-
-        progressDialog = new ProgressFragment();
-        progressDialog.setTitle("egui Test Progress");
-        progressDialog.setProgressMessage("Loading");
-        progressDialog.show(getFragmentManager(), null);
-
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                progressDialog.dismiss();
-            }
-        }, 5000);
-
-    }
-
-```
