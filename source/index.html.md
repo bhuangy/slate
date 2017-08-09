@@ -13,6 +13,18 @@ search: true
 
 Welcome to the Thermo Fisher Scientific egui Library! You can use our library to use a multitude of functions originating from the Monarch project. Below are the descriptions of the various functions available, as well as some code examples in the right column.
 
+## Import from Local File
+
+1. Go to File>New>New Module
+2. Select "Import .JAR/.AAR Package" and click next.
+3. Enter the path to .aar file and click finish.
+4. Go to File>Project Structure (Ctrl+Shift+Alt+S).
+5. Under "Modules," in left menu, select "app."
+6. Go to "Dependencies tab.
+7. Click the green "+" in the upper right corner.
+8. Select "Module Dependency"
+9. Select the new module from the list.
+
 ## Import from Github 
 
 Go to JitPack.com. 
