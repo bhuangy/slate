@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>egui Documentation</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;java&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -211,10 +211,7 @@
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
+              <a href="#" data-language-name="java">java</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -223,279 +220,551 @@
       <div id="toc" class="toc-list-h1">
           <li>
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
-          </li>
-          <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Kittens">Get All Kittens</a>
-                  </li>
-                  <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Kittens">Get a Specific Kitten</a>
-                  </li>
-                  <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Kittens">Delete a Specific Kitten</a>
+                    <a href="#import-from-github" class="toc-h2 toc-link" data-title="Introduction">Import from Github</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+            <a href="#utilities" class="toc-h1 toc-link" data-title="Utilities">Utilities</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#logger" class="toc-h2 toc-link" data-title="Utilities">Logger</a>
+                  </li>
+                  <li>
+                    <a href="#scpi" class="toc-h2 toc-link" data-title="Utilities">SCPI</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#widgets" class="toc-h1 toc-link" data-title="Widgets">Widgets</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#navigation-bar" class="toc-h2 toc-link" data-title="Widgets">Navigation Bar</a>
+                  </li>
+                  <li>
+                    <a href="#custom-keyboard" class="toc-h2 toc-link" data-title="Widgets">Custom Keyboard</a>
+                  </li>
+                  <li>
+                    <a href="#table" class="toc-h2 toc-link" data-title="Widgets">Table</a>
+                  </li>
+                  <li>
+                    <a href="#enter-pin" class="toc-h2 toc-link" data-title="Widgets">Enter Pin</a>
+                  </li>
+                  <li>
+                    <a href="#confirm-dialog" class="toc-h2 toc-link" data-title="Widgets">Confirm Dialog</a>
+                  </li>
+                  <li>
+                    <a href="#progress-dialog" class="toc-h2 toc-link" data-title="Widgets">Progress Dialog</a>
+                  </li>
+              </ul>
           </li>
       </div>
-        <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
-        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Welcome to the Thermo Fisher Scientific egui Library! You can use our library to use a multitude of functions originating from the Monarch project. Below are the descriptions of the various functions available, as well as some code examples in the right column.</p>
+<h2 id='import-from-github'>Import from Github</h2>
+<p>Go to JitPack.com. </p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>Type up repo in Look Up </p>
 
-<p>This example API documentation page was created with <a href="https://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
+<p>Use latest release to see what to add</p>
+
+<p>Public Repo: </p>
+
+<ol>
+<li>Go to root (not app) build.gradle. Add maven { url &#39;https://jitpack.io&#39; } in all projects { repositories … }</li>
+<li>Go to app/build.gradle. Add compile &#39;com.github.bhuangy:egui:0.1.0&#39;</li>
+<li>These instructions are automatically generated when you look up the repo on JitPack</li>
+</ol>
+
+<p>Private Repo:</p>
+
+<ol>
+<li>Must first authorize the private repo</li>
+<li>Add token   authToken=d3ba024cb9693c92d7ec65a78ef0b52e15231f06  in root gradle.properties</li>
+<li>Paste code as shown on JitPack</li>
+<li>Add code for app/build.gradle as seen in Public Repo instructions</li>
+<li>Instructions are on JitPack as well</li>
+</ol>
+<h1 id='utilities'>Utilities</h1><h2 id='logger'>Logger</h2>
 <blockquote>
-<p>To authorize, use this code:</p>
+<p>Logger Example - This will output to the specified file in logback.xml</p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<pre class="highlight java tab-java"><code><span class="kn">import</span> <span class="nn">com.example.egui.Utilities.logger.DCLog</span><span class="o">;</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">DCLog</span> <span class="n">LOG</span> <span class="o">=</span> <span class="n">DCLog</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">MainActivity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="nd">@Override</span>
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">LOG</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="s">"This is an example of how to use the logger"</span><span class="o">);</span>
+<span class="o">}</span>
 </code></pre>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
+<p>Allows user to add log statements, which are then sent to an output file that the user can specify. The log statements are labelled with the </p>
+<h3 id='instructions-to-setup'>Instructions to setup</h3>
+<p>You must import logback.xml into app/src/main/assets - The correct file can be found in library code.</p>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>Go to logback.xml and set the LOG_PATH value to the directory you want to get the log file from. Use the getCacheDir().toString() function in order to see which directory to set LOG_PATH to.</p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+<p>Change logger_name=“…” to your current package name. To access with permissions - go to your sdk directory. In order to see your sdk directory, go to the sdk manager in Android Studio and copy the file path in “Android SDK Location”. Locally, go to platform-tools. Run ./adb shell. Run “run-as com.example” replacing com.example with your package name. Go to the cache dir, and the log file will be in there</p>
+<h3 id='types-of-log-functions'>Types of Log functions</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
-<th>Default</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>e</td>
+<td>error</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>w</td>
+<td>warn</td>
+</tr>
+<tr>
+<td>i</td>
+<td>info</td>
+</tr>
+<tr>
+<td>d</td>
+<td>debug</td>
+</tr>
+<tr>
+<td>v</td>
+<td>trace</td>
 </tr>
 </tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
+<h2 id='scpi'>SCPI</h2>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Thread Method: This is a simplified code example, containing only certain parts of the application that are required for the SCPI client to start and send commands. It is recommended to create your own application and only use this code as a reference.</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
+<pre class="highlight java tab-java"><code>
+<span class="n">String</span> <span class="n">ipAddress</span> <span class="o">=</span> <span class="s">"10.0.2.2"</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">port</span> <span class="o">=</span> <span class="mi">7000</span><span class="o">;</span>
+<span class="n">QueryVersion</span> <span class="n">queryVersion</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QueryVersion</span><span class="o">();</span>
+<span class="n">ScpiCommand</span> <span class="n">state</span> <span class="o">=</span> <span class="k">new</span> <span class="n">State</span><span class="o">(</span><span class="s">"Cartridge:Inserted"</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+<span class="n">Button</span> <span class="n">b1</span><span class="o">;</span>
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+  <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+    <span class="kd">final</span> <span class="n">Intent</span> <span class="n">ISCommandIntent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">ISCommandService</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="kd">final</span> <span class="n">Intent</span> <span class="n">broadcastIntent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">BroadcastActivity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="cm">/* ThreadHandler */</span>
+    <span class="kd">final</span> <span class="n">Handler</span> <span class="n">handler</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Handler</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">handleMessage</span><span class="o">(</span><span class="n">Message</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">Bundle</span> <span class="n">bundle</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="na">getData</span><span class="o">();</span>
+            <span class="kt">boolean</span> <span class="n">serviceStarted</span> <span class="o">=</span> <span class="n">bundle</span><span class="o">.</span><span class="na">getBoolean</span><span class="o">(</span><span class="s">"myKey"</span><span class="o">);</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">serviceStarted</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span><span class="n">getApplicationContext</span><span class="o">(),</span> <span class="s">"Service is Ready: Sent Command"</span><span class="o">,</span><span class="n">Toast</span><span class="o">.</span><span class="na">LENGTH_SHORT</span><span class="o">).</span><span class="na">show</span><span class="o">();</span>
+                <span class="n">ISCommandService</span><span class="o">.</span><span class="na">sendCommand</span><span class="o">(</span><span class="n">state</span><span class="o">);</span>
+
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span><span class="n">getApplicationContext</span><span class="o">(),</span> <span class="s">"Thread: Service Is Not Ready Yet"</span><span class="o">,</span><span class="n">Toast</span><span class="o">.</span><span class="na">LENGTH_SHORT</span><span class="o">).</span><span class="na">show</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+
+    <span class="cm">/* First thread to start service */</span>
+    <span class="n">Runnable</span> <span class="n">runnable</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+         <span class="nd">@Override</span>
+         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+
+             <span class="cm">/* Create wait with 20 seconds to stall service start */</span>
+             <span class="kt">long</span> <span class="n">endTime</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span>
+                     <span class="o">+</span> <span class="mi">20</span><span class="o">*</span><span class="mi">1000</span><span class="o">;</span>
+
+             <span class="k">while</span> <span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">endTime</span><span class="o">)</span> <span class="o">{</span>
+                 <span class="kd">synchronized</span> <span class="o">(</span><span class="k">this</span><span class="o">)</span> <span class="o">{</span>
+                     <span class="k">try</span> <span class="o">{</span>
+                         <span class="n">wait</span><span class="o">(</span><span class="n">endTime</span> <span class="o">-</span>
+                                 <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">());</span>
+                     <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{}</span>
+                 <span class="o">}</span>
+             <span class="o">}</span>
+
+             <span class="n">startService</span><span class="o">(</span><span class="n">ISCommandIntent</span><span class="o">);</span>
+         <span class="o">}</span>
+    <span class="o">};</span>
+
+    <span class="n">Thread</span> <span class="n">serviceStart</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">runnable</span><span class="o">);</span>
+    <span class="n">serviceStart</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+
+    <span class="cm">/* Button */</span>
+    <span class="n">b1</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nd">@Override</span>
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="cm">/* Second Thread to check if client is ready and to send command if it is */</span>
+        <span class="n">Runnable</span> <span class="n">scpiMessenger</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+          <span class="nd">@Override</span>
+          <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+              <span class="n">Message</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">handler</span><span class="o">.</span><span class="na">obtainMessage</span><span class="o">();</span>
+              <span class="n">Bundle</span> <span class="n">bundle</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Bundle</span><span class="o">();</span>
+
+              <span class="n">LOG</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="s">"isInstrumentServerReady value: "</span> <span class="o">+</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">ISCommandService</span><span class="o">.</span><span class="na">isInstrumentServerReady</span><span class="o">));</span>
+              <span class="n">bundle</span><span class="o">.</span><span class="na">putBoolean</span><span class="o">(</span><span class="s">"myKey"</span><span class="o">,</span> <span class="n">ISCommandService</span><span class="o">.</span><span class="na">isInstrumentServerReady</span><span class="o">);</span>
+              <span class="n">msg</span><span class="o">.</span><span class="na">setData</span><span class="o">(</span><span class="n">bundle</span><span class="o">);</span>
+
+              <span class="k">if</span> <span class="o">(</span><span class="n">ISCommandService</span><span class="o">.</span><span class="na">isInstrumentServerReady</span><span class="o">)</span> <span class="o">{</span>
+                  <span class="n">ISCommandService</span><span class="o">.</span><span class="na">sendCommand</span><span class="o">(</span><span class="n">state</span><span class="o">);</span>
+
+              <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+
+                  <span class="n">LOG</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="s">"Thread: Service Is Not Ready Yet"</span><span class="o">);</span>
+              <span class="o">}</span>
+              <span class="n">handler</span><span class="o">.</span><span class="na">sendMessage</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span>
+          <span class="o">}</span>
+        <span class="o">};</span>
+
+        <span class="n">Thread</span> <span class="n">scpiMessage</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">scpiMessenger</span><span class="o">);</span>
+        <span class="n">scpiMessage</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+
+    <span class="o">}</span>
+
+  <span class="o">}</span>
+
+  <span class="n">Thread</span> <span class="n">scpiMessage</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">scpiMessenger</span><span class="o">);</span>
+  <span class="n">scpiMessage</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+
 </code></pre>
+<p>Communicates with the Instrument Server. i.e. sends commands, receives responses, controls the physical instrument.</p>
+<h3 id='instructions-to-setup-2'>Instructions to Setup</h3>
+<aside class="warning"> These instructions are for testing on the Instrument Server on a local machine </aside>
+
+<p>Run ./instrument.py (sudo ./instrument.py if permissions are denied)</p>
+
+<p>In a new terminal, run telnet localhost 2323 - this will allow you to send commands to the Instrument Server to test functionality. </p>
+
+<p>Check code example for Android functionality.</p>
+<h3 id='thread-method-code-explanation'>Thread Method Code explanation</h3>
+<p>This uses Threads to separately control when the scpi starts and when it sends commands in order to avoid a situation in which the scpi will send a command when it has not started yet.</p>
+
+<p>The ipAddress is defined for the local machine host, in this case it is 10.0.2.2. The port is pre-defined as 7000</p>
+
+<p>The Scpi Command state will send the command to the Instrument Server telling it to change its state to cartridge:inserted true.</p>
+
+<p>Create the Thread Handler to receive information from the Threads that we will use. Use the handler to interact with the Instrument Server i.e. send commands and alter the state of the instrument. This allows the SCPI client to only send commands once it has been started, and is ready to send and receive information.</p>
+
+<p>The first Thread is used to create a delay before starting the scpi service. This is for testing purposes, to ensure the scpi client will not try to send a command before it is ready.</p>
+
+<p>The Thread that is attached to the Button will check if the scpi client is ready before sending a message to the Handler to initiate the command. This occurs upon the button being clicked.</p>
+
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Broadcast Sender/Receiver Method: This example shows how to use the scpi client using broadcast receivers. The ability to send broadcasts was added to the ISCommandService, which allows the client to send a signal saying that it will start. Whoever is listening using a broadcast receiver will receive that signal and initiate commands, ensuring that it will only act once the client is ready.</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
-</tr>
-</tbody></table>
-<h1 id='errors'>Errors</h1>
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
+<pre class="highlight java tab-java"><code>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BroadcastActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
 
-<p>The Kittn API uses the following error codes:</p>
+    <span class="n">String</span> <span class="n">ipAddress</span> <span class="o">=</span> <span class="s">"10.0.2.2"</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">port</span> <span class="o">=</span> <span class="mi">7000</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">SHARED_SECRET_IS</span> <span class="o">=</span> <span class="s">"MbmfSAtNA4f"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">DCLog</span> <span class="n">LOG</span> <span class="o">=</span> <span class="n">DCLog</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">BroadcastActivity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="n">ScpiCommand</span> <span class="n">state</span> <span class="o">=</span> <span class="k">new</span> <span class="n">State</span><span class="o">(</span><span class="s">"Cartridge:Inserted"</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+    <span class="n">Button</span> <span class="n">commandButton</span><span class="o">,</span> <span class="n">b4</span><span class="o">;</span>
 
-<table><thead>
-<tr>
-<th>Error Code</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>400</td>
-<td>Bad Request -- Your request sucks</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found -- The specified kitten could not be found</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
-</tr>
-</tbody></table>
 
+    <span class="kd">private</span> <span class="n">BroadcastReceiver</span> <span class="n">scpiReadyReceiver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BroadcastReceiver</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onReceive</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">,</span> <span class="n">Intent</span> <span class="n">intent</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">commandButton</span> <span class="o">=</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">commandButton</span><span class="o">);</span>
+
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">intent</span><span class="o">.</span><span class="na">getAction</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">SuperService</span><span class="o">.</span><span class="na">SCPI_READY_INTENT</span><span class="o">))</span> <span class="o">{</span>
+
+                <span class="n">ISCommandService</span><span class="o">.</span><span class="na">setAccessLevel</span><span class="o">(</span><span class="n">Access</span><span class="o">.</span><span class="na">Level</span><span class="o">.</span><span class="na">Controller</span><span class="o">,</span> <span class="n">SHARED_SECRET_IS</span><span class="o">);</span>
+                <span class="n">ISCommandService</span><span class="o">.</span><span class="na">sendCommand</span><span class="o">(</span><span class="n">state</span><span class="o">);</span>
+                <span class="n">ISCommandService</span><span class="o">.</span><span class="na">getVersion</span><span class="o">(</span><span class="s">"InstrumentServer:Version"</span><span class="o">);</span>
+                <span class="n">LOG</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="s">"Received Broadcast"</span><span class="o">);</span>
+
+            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">intent</span><span class="o">.</span><span class="na">getAction</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">SuperService</span><span class="o">.</span><span class="na">SCPI_NOT_READY_INTENT</span><span class="o">))</span> <span class="o">{</span>
+                <span class="n">LOG</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="s">"ISMessageService Scpi is NOT ready"</span><span class="o">);</span>
+            <span class="o">}</span>
+
+            <span class="n">commandButton</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">view</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">ISCommandService</span><span class="o">.</span><span class="na">setAccessLevel</span><span class="o">(</span><span class="n">Access</span><span class="o">.</span><span class="na">Level</span><span class="o">.</span><span class="na">Administrator</span><span class="o">,</span> <span class="n">SHARED_SECRET_IS</span><span class="o">);</span>
+                    <span class="n">ISCommandService</span><span class="o">.</span><span class="na">sendCommand</span><span class="o">(</span><span class="n">state</span><span class="o">);</span>
+                    <span class="n">ISCommandService</span><span class="o">.</span><span class="na">getVersion</span><span class="o">(</span><span class="s">"InstrumentServer:Version"</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+
+
+        <span class="o">}</span>
+    <span class="o">};</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_broadcast</span><span class="o">);</span>
+
+
+        <span class="cm">/* Set to 10.0.2.2 - Instrument Server ipAddress */</span>
+        <span class="n">ISCommandService</span><span class="o">.</span><span class="na">setServerIpAddress</span><span class="o">(</span><span class="n">ipAddress</span><span class="o">,</span> <span class="n">port</span><span class="o">);</span>
+        <span class="n">b4</span> <span class="o">=</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">activityButton</span><span class="o">);</span>
+
+
+        <span class="cm">/* Start Service to broadcast SCPI is ready */</span>
+        <span class="kd">final</span> <span class="n">Intent</span> <span class="n">ISCommandIntent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">ISCommandService</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="kd">final</span> <span class="n">Intent</span> <span class="n">mainIntent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">MainActivity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+        <span class="cm">/* Register Receiver */</span>
+        <span class="n">LOG</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="s">"Register Broadcast Receiver"</span><span class="o">);</span>
+        <span class="n">registerReceiver</span><span class="o">(</span><span class="n">scpiReadyReceiver</span><span class="o">,</span> <span class="k">new</span> <span class="n">IntentFilter</span><span class="o">(</span><span class="n">SuperService</span><span class="o">.</span><span class="na">SCPI_READY_INTENT</span><span class="o">));</span>
+        <span class="n">registerReceiver</span><span class="o">(</span><span class="n">scpiReadyReceiver</span><span class="o">,</span> <span class="k">new</span> <span class="n">IntentFilter</span><span class="o">(</span><span class="n">SuperService</span><span class="o">.</span><span class="na">SCPI_NOT_READY_INTENT</span><span class="o">));</span>
+        <span class="n">registerReceiver</span><span class="o">(</span><span class="n">scpiReadyReceiver</span><span class="o">,</span> <span class="k">new</span> <span class="n">IntentFilter</span><span class="o">(</span><span class="n">SuperService</span><span class="o">.</span><span class="na">TOUCH_INTENT</span><span class="o">));</span>
+
+        <span class="n">startService</span><span class="o">(</span><span class="n">ISCommandIntent</span><span class="o">);</span>
+
+    <span class="o">}</span>
+
+</code></pre><h3 id='broadcast-send-receiver-method-code-explanation'>Broadcast Send/Receiver Method Code Explanation</h3>
+<p>First create the BroadcastReceiver. The SuperService.SCPI_READY_INTENT is a predefined broadcast that is sent out once the scpi client is initialized to start. If the receiver receives the correct broadcast, send the commands to the Instrument Server.</p>
+
+<p>In onCreate, register the receivers, and start the Service, which should send the broadcast to the receivers.</p>
+<h1 id='widgets'>Widgets</h1><h2 id='navigation-bar'>Navigation Bar</h2>
+<p>The Navigation Bar is used in order to switch tabs between Layouts in app. It can be used in conjunction with other Widgets i.e. have one Widget per tab (Layout). </p>
+
+<blockquote>
+<p>Navigation Bar Code Example</p>
+</blockquote>
+<pre class="highlight java tab-java"><code>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">NavigationBarActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="n">NavigationBar</span> <span class="n">navigationBar</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">nav_bar</span><span class="o">);</span>
+
+        <span class="c1">// Initialize navigationBar</span>
+        <span class="n">navigationBar</span> <span class="o">=</span> <span class="o">(</span><span class="n">NavigationBar</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">navigationBar</span><span class="o">);</span>
+        <span class="n">navigationBar</span><span class="o">.</span><span class="na">addItem</span><span class="o">(</span><span class="s">"Table"</span><span class="o">);</span>
+        <span class="n">navigationBar</span><span class="o">.</span><span class="na">addItem</span><span class="o">(</span><span class="s">"Keyboard"</span><span class="o">);</span>
+
+        <span class="n">navigationBar</span><span class="o">.</span><span class="na">setOnItemClickListener</span><span class="o">(</span><span class="n">navigationBarItemClickListener</span><span class="o">);</span>
+
+        <span class="c1">//Initialize LinearLayouts</span>
+        <span class="n">page1</span> <span class="o">=</span> <span class="o">(</span><span class="n">LinearLayout</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">Layout1</span><span class="o">);</span>
+        <span class="n">page2</span> <span class="o">=</span> <span class="o">(</span><span class="n">LinearLayout</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">Layout2</span><span class="o">);</span>
+
+        <span class="c1">//Set only page 1 to appear initially</span>
+        <span class="n">page2</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="n">View</span><span class="o">.</span><span class="na">GONE</span><span class="o">);</span>
+
+        <span class="c1">//initialize layout parts</span>
+        <span class="n">tableView</span> <span class="o">=</span> <span class="o">(</span><span class="n">TableView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">tableView</span><span class="o">);</span>
+        <span class="n">textView</span> <span class="o">=</span> <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">textView</span><span class="o">);</span>
+
+        <span class="kd">private</span> <span class="n">NavigationBar</span><span class="o">.</span><span class="na">OnItemClickListener</span> <span class="n">navigationBarItemClickListener</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NavigationBar</span><span class="o">.</span><span class="na">OnItemClickListener</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onItemClicked</span><span class="o">(</span><span class="n">View</span> <span class="n">View</span><span class="o">,</span> <span class="kt">int</span> <span class="n">itemIndex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">itemIndex</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">page1</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="n">android</span><span class="o">.</span><span class="na">view</span><span class="o">.</span><span class="na">View</span><span class="o">.</span><span class="na">VISIBLE</span><span class="o">);</span>
+                <span class="n">page2</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="n">View</span><span class="o">.</span><span class="na">GONE</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">itemIndex</span> <span class="o">==</span> <span class="mi">1</span><span class="o">){</span>
+                <span class="n">page1</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="n">View</span><span class="o">.</span><span class="na">GONE</span><span class="o">);</span>
+                <span class="n">page2</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="n">android</span><span class="o">.</span><span class="na">view</span><span class="o">.</span><span class="na">View</span><span class="o">.</span><span class="na">VISIBLE</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">};</span>
+  <span class="o">}</span>
+
+</code></pre><h2 id='custom-keyboard'>Custom Keyboard</h2>
+<blockquote>
+<p>Custom Keyboard Code Example</p>
+</blockquote>
+<pre class="highlight java tab-java"><code>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">KeyboardActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
+
+    <span class="n">TextView</span> <span class="n">textView</span><span class="o">;</span>
+    <span class="n">Button</span> <span class="n">typeButton</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">enabledSpecialChars</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">DCLog</span> <span class="n">LOG</span> <span class="o">=</span> <span class="n">DCLog</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">KeyboardActivity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">keyboard</span><span class="o">);</span>
+
+        <span class="n">textView</span> <span class="o">=</span> <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">textView</span><span class="o">);</span>
+
+        <span class="kd">final</span> <span class="n">CustomKeyboard</span> <span class="n">keyboard</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CustomKeyboard</span><span class="o">(</span><span class="k">this</span><span class="o">,</span>
+                <span class="o">(</span><span class="n">CustomKeyboardView</span><span class="o">)</span><span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">keyboardview</span><span class="o">));</span>
+
+        <span class="n">textView</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">view</span><span class="o">)</span> <span class="o">{</span>
+
+                <span class="n">EditTextDialogFragment</span> <span class="n">fragment</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EditTextDialogFragment</span><span class="o">();</span>
+                <span class="n">fragment</span><span class="o">.</span><span class="na">setCanBeEmpty</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+                <span class="n">fragment</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span><span class="s">"egui Example"</span><span class="o">);</span>
+                <span class="n">fragment</span><span class="o">.</span><span class="na">setTextViewToEdit</span><span class="o">(</span><span class="n">textView</span><span class="o">);</span>
+                <span class="n">fragment</span><span class="o">.</span><span class="na">setInputType</span><span class="o">(</span><span class="n">TYPE_CLASS_TEXT</span> <span class="o">|</span> <span class="n">TYPE_TEXT_VARIATION_PERSON_NAME</span><span class="o">);</span>
+                <span class="n">fragment</span><span class="o">.</span><span class="na">show</span><span class="o">(</span><span class="n">getFragmentManager</span><span class="o">(),</span> <span class="s">"editTextDialog"</span><span class="o">);</span>
+
+            <span class="o">}</span>
+        <span class="o">});</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre>
+<p>The Custom Keyboard widget is meant to be used as a uniform keyboard for all Thermo Fisher products. It is a pop-up keyboard that appears once the user initiates a certain action i.e. clicking a button or text.</p>
+<h3 id='instructions-to-setup-3'>Instructions to Setup</h3>
+<p>In appropriate layout xml file, state CustomKeyboardView. Example code shows how to properly call EditText Fragment in order to edit using the keyboard.</p>
+<h2 id='table'>Table</h2>
+<p>A table widget with specified columns and rows. The code example creates a 3 columned table, and populates it with numbers.</p>
+
+<blockquote>
+<p>Custom Table Code Example</p>
+</blockquote>
+<pre class="highlight java tab-java"><code>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TableActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
+      <span class="kd">private</span> <span class="n">TableView</span> <span class="n">tableView</span><span class="o">;</span>
+
+      <span class="nd">@Override</span>
+      <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+
+          <span class="n">tableView</span> <span class="o">=</span> <span class="o">(</span><span class="n">TableView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">tableView</span><span class="o">);</span>
+          <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">tableHeader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+          <span class="n">tableHeader</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Column 1"</span><span class="o">);</span>
+          <span class="n">tableHeader</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Column 2"</span><span class="o">);</span>
+          <span class="n">tableHeader</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Column 3"</span><span class="o">);</span>
+
+          <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">profilesData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+          <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+              <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">profileData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+              <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                  <span class="n">profileData</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">Integer</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">count</span><span class="o">++));</span>
+              <span class="o">}</span>
+              <span class="n">profilesData</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">profileData</span><span class="o">);</span>
+          <span class="o">}</span>
+
+          <span class="n">tableView</span><span class="o">.</span><span class="na">setColumnWidths</span><span class="o">(</span><span class="k">new</span> <span class="kt">int</span><span class="o">[]</span> <span class="o">{</span><span class="mi">150</span><span class="o">,</span> <span class="mi">300</span><span class="o">,</span> <span class="mi">300</span><span class="o">});</span>
+          <span class="n">tableView</span><span class="o">.</span><span class="na">setColumnHeaders</span><span class="o">(</span><span class="n">tableHeader</span><span class="o">);</span>
+          <span class="n">tableView</span><span class="o">.</span><span class="na">setData</span><span class="o">(</span><span class="n">profilesData</span><span class="o">);</span>
+
+      <span class="o">}</span>
+
+</code></pre><h2 id='enter-pin'>Enter Pin</h2>
+<p>A pin pad created using the numberpad widget. Can register it to check for a correct pin number. The code example uses a textview as a button, which leads to a enter pin Fragment Dialog.</p>
+
+<blockquote>
+<p>Custom Pin Pad Code Example</p>
+</blockquote>
+<pre class="highlight java tab-java"><code>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PinActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
+    <span class="n">numberPadText</span> <span class="o">=</span> <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">numberPadText</span><span class="o">);</span>
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">nav_bar</span><span class="o">);</span>
+
+        <span class="n">numberPadText</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">view</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="kd">final</span> <span class="n">EnterPinDialogFragment</span> <span class="n">pinFragment</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EnterPinDialogFragment</span><span class="o">();</span>
+                    <span class="c1">//NumberPadDialogFragment fragment = new NumberPadDialogFragment();</span>
+                    <span class="n">pinFragment</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span><span class="s">"Enter Pin"</span><span class="o">);</span>
+                    <span class="n">pinFragment</span><span class="o">.</span><span class="na">show</span><span class="o">(</span><span class="n">getFragmentManager</span><span class="o">(),</span> <span class="s">"editTextDialog"</span><span class="o">);</span>
+                    <span class="kd">final</span> <span class="n">ConfirmDialogFragment</span> <span class="n">confirmPin</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ConfirmDialogFragment</span><span class="o">();</span>
+                    <span class="n">confirmPin</span><span class="o">.</span><span class="na">showSecondaryButton</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+
+                    <span class="n">pinFragment</span><span class="o">.</span><span class="na">setDismissListener</span><span class="o">(</span><span class="k">new</span> <span class="n">BaseDialogFragment</span><span class="o">.</span><span class="na">DismissListener</span><span class="o">()</span> <span class="o">{</span>
+                        <span class="nd">@Override</span>
+                        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onDismiss</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">bundle</span><span class="o">)</span> <span class="o">{</span>
+                            <span class="k">if</span> <span class="o">(</span><span class="n">pinFragment</span><span class="o">.</span><span class="na">getPinEntered</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">"3333"</span><span class="o">))</span> <span class="o">{</span>
+                                <span class="n">confirmPin</span><span class="o">.</span><span class="na">setPrimaryButtonText</span><span class="o">(</span><span class="s">"OK"</span><span class="o">);</span>
+                                <span class="n">confirmPin</span><span class="o">.</span><span class="na">show</span><span class="o">(</span><span class="n">getFragmentManager</span><span class="o">(),</span> <span class="s">"Pin Confirmation"</span><span class="o">);</span>
+                                <span class="n">confirmPin</span><span class="o">.</span><span class="na">setPrimaryMessage</span><span class="o">(</span><span class="s">"Correct Pin"</span><span class="o">);</span>
+                            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                                <span class="n">confirmPin</span><span class="o">.</span><span class="na">setPrimaryButtonText</span><span class="o">(</span><span class="s">"OK"</span><span class="o">);</span>
+                                <span class="n">confirmPin</span><span class="o">.</span><span class="na">show</span><span class="o">(</span><span class="n">getFragmentManager</span><span class="o">(),</span> <span class="s">"Pin Confirmation"</span><span class="o">);</span>
+                                <span class="n">confirmPin</span><span class="o">.</span><span class="na">setPrimaryMessage</span><span class="o">(</span><span class="s">"Incorrect Pin \nEntered: "</span> <span class="o">+</span> <span class="n">pinFragment</span><span class="o">.</span><span class="na">getPinEntered</span><span class="o">());</span>
+                            <span class="o">}</span>
+                        <span class="o">}</span>
+                    <span class="o">});</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+      <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre><h2 id='confirm-dialog'>Confirm Dialog</h2>
+<p>A confirmation page that has a primary and secondary button. The code example creates a confirmation page with the message set to &quot;Confirmation&quot;, and a Primary and Seconday Button.</p>
+
+<blockquote>
+<p>Custon Confirmation Page Code Example</p>
+</blockquote>
+<pre class="highlight java tab-java"><code>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ConfirmActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="n">confirmText</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">nav_bar</span><span class="o">);</span>
+
+        <span class="n">confirmText</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">"Confirm"</span><span class="o">);</span>
+            <span class="n">confirmText</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">view</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">ConfirmDialogFragment</span> <span class="n">fragment</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ConfirmDialogFragment</span><span class="o">();</span>
+                    <span class="n">fragment</span><span class="o">.</span><span class="na">setPrimaryButtonText</span><span class="o">(</span><span class="s">"Primary Button"</span><span class="o">);</span>
+                    <span class="n">fragment</span><span class="o">.</span><span class="na">setSecondaryButtonText</span><span class="o">(</span><span class="s">"Secondary Button"</span><span class="o">);</span>
+                    <span class="n">fragment</span><span class="o">.</span><span class="na">show</span><span class="o">(</span><span class="n">getFragmentManager</span><span class="o">(),</span> <span class="s">"Confirm"</span><span class="o">);</span>
+                    <span class="n">fragment</span><span class="o">.</span><span class="na">setPrimaryMessage</span><span class="o">(</span><span class="s">"Confirmation"</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre><h2 id='progress-dialog'>Progress Dialog</h2>
+<p>A progress page that has a splash animation. The code example displays a Progress page that stays on for 5 seconds before being dismissed.</p>
+
+<blockquote>
+<p>Custom Progress Page Code Example</p>
+</blockquote>
+<pre class="highlight java tab-java"><code>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ProgressActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">nav_bar</span><span class="o">);</span>
+
+        <span class="n">progressDialog</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ProgressFragment</span><span class="o">();</span>
+        <span class="n">progressDialog</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span><span class="s">"egui Test Progress"</span><span class="o">);</span>
+        <span class="n">progressDialog</span><span class="o">.</span><span class="na">setProgressMessage</span><span class="o">(</span><span class="s">"Loading"</span><span class="o">);</span>
+        <span class="n">progressDialog</span><span class="o">.</span><span class="na">show</span><span class="o">(</span><span class="n">getFragmentManager</span><span class="o">(),</span> <span class="kc">null</span><span class="o">);</span>
+
+        <span class="kd">final</span> <span class="n">Handler</span> <span class="n">handler</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Handler</span><span class="o">();</span>
+        <span class="n">handler</span><span class="o">.</span><span class="na">postDelayed</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="n">progressDialog</span><span class="o">.</span><span class="na">dismiss</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">},</span> <span class="mi">5000</span><span class="o">);</span>
+
+    <span class="o">}</span>
+
+</code></pre>
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
+                <a href="#" data-language-name="java">java</a>
           </div>
       </div>
     </div>
