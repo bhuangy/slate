@@ -263,6 +263,14 @@
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#cloud" class="toc-h1 toc-link" data-title="Cloud">Cloud</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#instructions-to-setup-4" class="toc-h2 toc-link" data-title="Cloud">Instructions to Setup</a>
+                  </li>
+              </ul>
+          </li>
       </div>
     </div>
     <div class="page-wrapper">
@@ -771,7 +779,150 @@
 <p>A confirmation page that has a primary and secondary button. The code example creates a confirmation page with the message set to &quot;Confirmation&quot;, and a Primary and Seconday Button.</p>
 <h3 id='progress-dialog'>Progress Dialog</h3>
 <p>A progress page that has a splash animation. The code example displays a Progress page that stays on for 5 seconds before being dismissed.</p>
+<h1 id='cloud'>Cloud</h1>
+<p>Cloud configuration: Allows users to link their instrument profile with their Thermo Fisher Cloud profile. (Must already have an existing Thermo Fisher Cloud account)</p>
+<h2 id='instructions-to-setup-4'>Instructions to Setup</h2>
+<blockquote>
+<p>Declare in AndroidManifest.xml</p>
+</blockquote>
+<pre class="highlight java tab-java"><code><span class="o">&lt;</span><span class="n">provider</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"com.example.egui.contentprovider.UsersProvider"</span>
+                  <span class="nl">android:</span><span class="n">authorities</span><span class="o">=</span><span class="s">"com.example.egui.contentprovider.usersprovider"</span>
+                  <span class="nl">android:</span><span class="n">exported</span><span class="o">=</span><span class="s">"true"</span><span class="o">&gt;</span>
 
+<span class="o">&lt;/</span><span class="n">provider</span><span class="o">&gt;</span> 
+
+<span class="o">&lt;</span><span class="n">provider</span> <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"com.example.egui.contentprovider.RetryIotRequestProvider"</span>
+                  <span class="nl">android:</span><span class="n">authorities</span><span class="o">=</span><span class="s">"com.example.egui.contentprovider.retryiotrequestprovider"</span>
+                  <span class="nl">android:</span><span class="n">exported</span><span class="o">=</span><span class="s">"true"</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">provider</span><span class="o">&gt;</span>
+</code></pre>
+<p>In your AndroidManifest.xml declare the provider as shown in the Code Example</p>
+
+<p>The CloudTestActivity Code example shows how to link users, and how to export specific files to the Cloud.</p>
+
+<blockquote>
+<p>CloudTestActivity Code</p>
+</blockquote>
+<pre class="highlight java tab-java"><code>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CloudTestActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">Button</span> <span class="n">cloudButton</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">FileStorageFacade</span> <span class="n">storageFacade</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">DCLog</span> <span class="n">LOG</span> <span class="o">=</span> <span class="n">DCLog</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">CloudTestActivity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="kd">private</span> <span class="n">CloudStorage</span> <span class="n">cloudStorage</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CloudStorage</span><span class="o">();</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="nd">@Nullable</span> <span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">cloud</span><span class="o">);</span>
+
+
+        <span class="kd">final</span> <span class="n">Intent</span> <span class="n">ISCommandIntent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">ISCommandService</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">startService</span><span class="o">(</span><span class="n">ISCommandIntent</span><span class="o">);</span>
+
+        <span class="kd">final</span> <span class="n">Intent</span> <span class="n">ISMessageIntent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">ISMessageService</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">startService</span><span class="o">(</span><span class="n">ISMessageIntent</span><span class="o">);</span>
+
+
+        <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">initButton</span><span class="o">).</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">view</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// Initialize IoTUtils and Storage with current Context</span>
+                <span class="n">IoTUtils</span><span class="o">.</span><span class="na">initialise</span><span class="o">(</span><span class="n">CloudTestActivity</span><span class="o">.</span><span class="na">this</span><span class="o">);</span>
+                <span class="n">Storage</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">initialize</span><span class="o">(</span><span class="n">CloudTestActivity</span><span class="o">.</span><span class="na">this</span><span class="o">);</span>
+
+                <span class="c1">// Create FileStorage Instance. Set and enable Cloud Storage</span>
+                <span class="n">storageFacade</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileStorageFacade</span><span class="o">(</span><span class="n">CloudTestActivity</span><span class="o">.</span><span class="na">this</span><span class="o">,</span> <span class="s">"ExportStorage"</span><span class="o">,</span> <span class="s">"brandon"</span><span class="o">);</span>
+                <span class="n">storageFacade</span><span class="o">.</span><span class="na">enable</span><span class="o">(</span><span class="n">StorageType</span><span class="o">.</span><span class="na">CLOUD</span><span class="o">);</span>
+                <span class="n">storageFacade</span><span class="o">.</span><span class="na">setStorage</span><span class="o">(</span><span class="k">new</span> <span class="n">IoTCloudStorage</span><span class="o">());</span>
+
+            <span class="o">}</span>
+        <span class="o">});</span>
+
+        <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">cloudButton</span><span class="o">).</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">view</span><span class="o">)</span> <span class="o">{</span>
+
+                <span class="c1">//Fragment to input and select Cloud User Profile</span>
+                <span class="kd">final</span> <span class="n">CloudConnectionSelectionFragment</span> <span class="n">fragment</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CloudConnectionSelectionFragment</span><span class="o">();</span>
+                <span class="n">fragment</span><span class="o">.</span><span class="na">show</span><span class="o">(</span><span class="n">getFragmentManager</span><span class="o">(),</span> <span class="kc">null</span><span class="o">);</span>
+
+                <span class="n">fragment</span><span class="o">.</span><span class="na">setDismissListener</span><span class="o">(</span><span class="k">new</span> <span class="n">BaseDialogFragment</span><span class="o">.</span><span class="na">DismissListener</span><span class="o">()</span> <span class="o">{</span>
+                    <span class="nd">@Override</span>
+                    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onDismiss</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">bundle</span><span class="o">)</span> <span class="o">{</span>
+
+                        <span class="c1">// Get instrument user's current profile information</span>
+                        <span class="n">InstrumentUser</span> <span class="n">user</span> <span class="o">=</span> <span class="n">LoginManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">getCurrentUser</span><span class="o">();</span>
+
+                        <span class="c1">// Set Cloud Storage user information with instrument user profile</span>
+                        <span class="n">cloudStorage</span> <span class="o">=</span> <span class="o">(</span><span class="n">CloudStorage</span><span class="o">)</span> <span class="n">storageFacade</span><span class="o">.</span><span class="na">getStorage</span><span class="o">(</span><span class="n">StorageType</span><span class="o">.</span><span class="na">CLOUD</span><span class="o">);</span>
+                        <span class="n">cloudStorage</span><span class="o">.</span><span class="na">setPrincipalId</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">getPrincipalId</span><span class="o">());</span>
+                        <span class="k">try</span> <span class="o">{</span>
+                            <span class="n">cloudStorage</span><span class="o">.</span><span class="na">connect</span><span class="o">();</span>
+                        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">StorageException</span> <span class="n">ignore</span><span class="o">)</span> <span class="o">{</span>
+
+                        <span class="o">}</span>
+                    <span class="o">}</span>
+                <span class="o">});</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+
+        <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">exportButton</span><span class="o">).</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">view</span><span class="o">)</span> <span class="o">{</span>
+
+
+                <span class="n">LOG</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="s">"cloudStorage PrincipalID: "</span> <span class="o">+</span> <span class="n">cloudStorage</span><span class="o">.</span><span class="na">getPrincipalId</span><span class="o">());</span>
+
+                <span class="k">if</span> <span class="o">(</span><span class="n">cloudStorage</span><span class="o">.</span><span class="na">getPrincipalId</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">""</span><span class="o">))</span> <span class="o">{</span>
+                    <span class="n">Toast</span> <span class="n">toast</span> <span class="o">=</span> <span class="n">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span><span class="n">CloudTestActivity</span><span class="o">.</span><span class="na">this</span><span class="o">,</span> <span class="s">"Login to Cloud First"</span><span class="o">,</span> <span class="n">Toast</span><span class="o">.</span><span class="na">LENGTH_SHORT</span><span class="o">);</span>
+                    <span class="n">toast</span><span class="o">.</span><span class="na">show</span><span class="o">();</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                    <span class="kd">final</span> <span class="n">ExportLocationFragment</span> <span class="n">fragment</span> <span class="o">=</span> <span class="n">ExportLocationFragment</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span>
+                            <span class="o">(</span><span class="s">"Test"</span><span class="o">),</span>
+                            <span class="n">storageFacade</span><span class="o">,</span>
+                            <span class="kc">true</span><span class="o">,</span>
+                            <span class="kc">true</span><span class="o">,</span>
+                            <span class="kc">true</span><span class="o">);</span>
+                    <span class="n">fragment</span><span class="o">.</span><span class="na">show</span><span class="o">(</span><span class="n">getFragmentManager</span><span class="o">(),</span> <span class="kc">null</span><span class="o">);</span>
+
+                    <span class="n">fragment</span><span class="o">.</span><span class="na">setDismissListener</span><span class="o">(</span><span class="k">new</span> <span class="n">BaseDialogFragment</span><span class="o">.</span><span class="na">DismissListener</span><span class="o">()</span> <span class="o">{</span>
+                        <span class="nd">@Override</span>
+                        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onDismiss</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">bundle</span><span class="o">)</span> <span class="o">{</span>
+                            <span class="c1">// Set and initialize file to export</span>
+                            <span class="n">File</span> <span class="n">myFileToExport</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">getFilesDir</span><span class="o">(),</span> <span class="s">"test.txt"</span><span class="o">);</span>
+                            <span class="n">String</span> <span class="n">remoteDirectory</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
+                            <span class="kd">final</span> <span class="n">ExternalFile</span> <span class="n">externalFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ExternalFile</span><span class="o">(</span><span class="n">remoteDirectory</span><span class="o">,</span> <span class="n">myFileToExport</span><span class="o">);</span>
+
+                            <span class="c1">// Create exportTask, which is defined in our Library</span>
+                            <span class="n">ExportTask</span> <span class="n">exportTask</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ExportTask</span><span class="o">(</span><span class="n">storageFacade</span><span class="o">,</span> <span class="n">CloudTestActivity</span><span class="o">.</span><span class="na">this</span><span class="o">)</span> <span class="o">{</span>
+
+                                <span class="nd">@Override</span>
+                                <span class="kd">protected</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">ExternalFile</span><span class="o">&gt;</span> <span class="nf">getSourceFiles</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+                                    <span class="n">List</span><span class="o">&lt;</span><span class="n">ExternalFile</span><span class="o">&gt;</span> <span class="n">externalFileList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+                                    <span class="n">externalFileList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">externalFile</span><span class="o">);</span>
+                                    <span class="k">return</span> <span class="n">externalFileList</span><span class="o">;</span>
+                                <span class="o">}</span>
+
+                                <span class="nd">@Override</span>
+                                <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onPostExecute</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">ExportStatus</span><span class="o">&gt;</span> <span class="n">statusList</span><span class="o">)</span> <span class="o">{</span>
+                                    <span class="kd">super</span><span class="o">.</span><span class="na">onPostExecute</span><span class="o">(</span><span class="n">statusList</span><span class="o">);</span>
+                                    <span class="n">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span><span class="n">CloudTestActivity</span><span class="o">.</span><span class="na">this</span><span class="o">,</span> <span class="s">"exported"</span><span class="o">,</span> <span class="n">Toast</span><span class="o">.</span><span class="na">LENGTH_SHORT</span><span class="o">).</span><span class="na">show</span><span class="o">();</span>
+                                <span class="o">}</span>
+                            <span class="o">};</span>
+                            <span class="c1">// Executes in separate thread so that the UI is not interrupted</span>
+                            <span class="n">exportTask</span><span class="o">.</span><span class="na">executeOnExecutor</span><span class="o">(</span><span class="n">AsyncTask</span><span class="o">.</span><span class="na">THREAD_POOL_EXECUTOR</span><span class="o">);</span>
+                        <span class="o">}</span>
+                    <span class="o">});</span>
+
+                <span class="o">}</span>
+
+            <span class="o">}</span>
+        <span class="o">});</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+
+</code></pre>
       </div>
       <div class="dark-box">
           <div class="lang-selector">
