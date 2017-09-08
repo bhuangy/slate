@@ -382,7 +382,7 @@ public class NavigationBarActivity extends Activity {
 
         for (int i = 0; i < 5; i++) {
             List<String> profileData = new ArrayList<>();
-
+ 
             for (int j = 0; j < 3; j++) {
                 profileData.add(Integer.toString(count++));
             }
@@ -515,7 +515,7 @@ The Custom Keyboard widget is meant to be used as a uniform keyboard for all The
 
 In appropriate layout xml file, state CustomKeyboardView. Example code shows how to properly call EditText Fragment in order to edit using the keyboard.
 
-###Table
+### Table
 
 A table widget with specified columns and rows. The code example creates a 3 columned table, and populates it with numbers.
 
@@ -530,4 +530,154 @@ A confirmation page that has a primary and secondary button. The code example cr
 ### Progress Dialog
 
 A progress page that has a splash animation. The code example displays a Progress page that stays on for 5 seconds before being dismissed.
+
+# Cloud
+
+Cloud configuration: Allows users to link their instrument profile with their Thermo Fisher Cloud profile. (Must already have an existing Thermo Fisher Cloud account)
+
+## Instructions to Setup
+
+> Declare in AndroidManifest.xml
+
+```java
+<provider android:name="com.example.egui.contentprovider.UsersProvider"
+                  android:authorities="com.example.egui.contentprovider.usersprovider"
+                  android:exported="true">
+
+</provider> 
+
+<provider android:name="com.example.egui.contentprovider.RetryIotRequestProvider"
+                  android:authorities="com.example.egui.contentprovider.retryiotrequestprovider"
+                  android:exported="true">
+</provider>
+```
+
+In your AndroidManifest.xml declare the provider as shown in the Code Example
+
+The CloudTestActivity Code example shows how to link users, and how to export specific files to the Cloud.
+
+> CloudTestActivity Code
+
+```java
+
+public class CloudTestActivity extends Activity {
+    private Button cloudButton;
+    private FileStorageFacade storageFacade;
+    private static final DCLog LOG = DCLog.getLogger(CloudTestActivity.class);
+    private CloudStorage cloudStorage = new CloudStorage();
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.cloud);
+
+
+        final Intent ISCommandIntent = new Intent(this, ISCommandService.class);
+        startService(ISCommandIntent);
+
+        final Intent ISMessageIntent = new Intent(this, ISMessageService.class);
+        startService(ISMessageIntent);
+
+
+        findViewById(R.id.initButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Initialize IoTUtils and Storage with current Context
+                IoTUtils.initialise(CloudTestActivity.this);
+                Storage.getInstance().initialize(CloudTestActivity.this);
+
+                // Create FileStorage Instance. Set and enable Cloud Storage
+                storageFacade = new FileStorageFacade(CloudTestActivity.this, "ExportStorage", "brandon");
+                storageFacade.enable(StorageType.CLOUD);
+                storageFacade.setStorage(new IoTCloudStorage());
+
+            }
+        });
+
+        findViewById(R.id.cloudButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Fragment to input and select Cloud User Profile
+                final CloudConnectionSelectionFragment fragment = new CloudConnectionSelectionFragment();
+                fragment.show(getFragmentManager(), null);
+
+                fragment.setDismissListener(new BaseDialogFragment.DismissListener() {
+                    @Override
+                    public void onDismiss(Bundle bundle) {
+
+                        // Get instrument user's current profile information
+                        InstrumentUser user = LoginManager.getInstance().getCurrentUser();
+
+                        // Set Cloud Storage user information with instrument user profile
+                        cloudStorage = (CloudStorage) storageFacade.getStorage(StorageType.CLOUD);
+                        cloudStorage.setPrincipalId(user.getPrincipalId());
+                        try {
+                            cloudStorage.connect();
+                        } catch (StorageException ignore) {
+
+                        }
+                    }
+                });
+            }
+        });
+
+        findViewById(R.id.exportButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                LOG.d("cloudStorage PrincipalID: " + cloudStorage.getPrincipalId());
+
+                if (cloudStorage.getPrincipalId().equals("")) {
+                    Toast toast = Toast.makeText(CloudTestActivity.this, "Login to Cloud First", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    final ExportLocationFragment fragment = ExportLocationFragment.newInstance(
+                            ("Test"),
+                            storageFacade,
+                            true,
+                            true,
+                            true);
+                    fragment.show(getFragmentManager(), null);
+
+                    fragment.setDismissListener(new BaseDialogFragment.DismissListener() {
+                        @Override
+                        public void onDismiss(Bundle bundle) {
+                            // Set and initialize file to export
+                            File myFileToExport = new File(getFilesDir(), "test.txt");
+                            String remoteDirectory = "";
+                            final ExternalFile externalFile = new ExternalFile(remoteDirectory, myFileToExport);
+
+                            // Create exportTask, which is defined in our Library
+                            ExportTask exportTask = new ExportTask(storageFacade, CloudTestActivity.this) {
+
+                                @Override
+                                protected List<ExternalFile> getSourceFiles() throws Exception {
+                                    List<ExternalFile> externalFileList = new ArrayList<>();
+                                    externalFileList.add(externalFile);
+                                    return externalFileList;
+                                }
+
+                                @Override
+                                protected void onPostExecute(List<ExportStatus> statusList) {
+                                    super.onPostExecute(statusList);
+                                    Toast.makeText(CloudTestActivity.this, "exported", Toast.LENGTH_SHORT).show();
+                                }
+                            };
+                            // Executes in separate thread so that the UI is not interrupted
+                            exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                        }
+                    });
+
+                }
+
+            }
+        });
+    }
+}
+
+
+```
+
 
